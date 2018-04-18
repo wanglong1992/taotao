@@ -11,7 +11,7 @@
 	}
 </style>
 </head>
-<body>
+<body class="easyui-layout">
 	<div id="master-layout">
 		<div data-options="region:'north',border:false,bodyCls:'theme-header-layout'">
         	<div class="theme-navigate">
