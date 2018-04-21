@@ -5,7 +5,6 @@ import com.github.abel533.mapper.Mapper;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.taotao.manage.pojo.BasePojo;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.lang.reflect.Field;
@@ -14,6 +13,7 @@ import java.lang.reflect.Type;
 import java.util.Date;
 import java.util.List;
 
+@SuppressWarnings("all")
 public class BaseService<T extends BasePojo> {
 
     @Autowired
