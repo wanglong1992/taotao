@@ -29,7 +29,7 @@ public class ItemCatController {
             ItemCat record = new ItemCat();
             record.setParentId(parentId);
             record.setStatus(1);
-            List<ItemCat> itemCats = itemCatService.querByParentId(record);
+            List<ItemCat> itemCats = itemCatService.queryListByWhere(record);
             if (CollectionUtils.isEmpty(itemCats)) {
                 return ResponseEntity.notFound().build();
             }

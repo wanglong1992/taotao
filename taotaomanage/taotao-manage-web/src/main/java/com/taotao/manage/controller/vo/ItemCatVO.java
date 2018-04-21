@@ -7,7 +7,7 @@ public class ItemCatVO extends ItemCat {
         return getName();
     }
 
-    public String getStatu() {
+    public String getState() {
         return getIsParent() ? "closed" : "open";
     }
 }
