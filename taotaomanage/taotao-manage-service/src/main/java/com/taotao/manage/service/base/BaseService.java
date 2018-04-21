@@ -1,4 +1,4 @@
-package com.taotao.manage.service;
+package com.taotao.manage.service.base;
 
 import com.github.abel533.entity.Example;
 import com.github.abel533.mapper.Mapper;
