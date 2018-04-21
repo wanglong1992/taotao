@@ -16,9 +16,10 @@ import java.util.List;
 @SuppressWarnings("all")
 public class BaseService<T extends BasePojo> {
 
+    protected Class<T> clazz;
     @Autowired
+    //泛型注入
     private Mapper<T> mapper;
-    private Class<T> clazz;
 
     {
         ParameterizedType parameterizedType = (ParameterizedType) this.getClass().getGenericSuperclass();
@@ -169,9 +170,5 @@ public class BaseService<T extends BasePojo> {
 
     public int deleteByWhere(T record) {
         return mapper.delete(record);
-    }
-
-    public Class<T> getClazz() {
-        return clazz;
     }
 }
