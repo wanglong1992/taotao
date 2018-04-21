@@ -14,6 +14,11 @@ public class ItemCatServiceImpl implements ItemCatService {
     private ItemCatMapper itemCatMapper;
     @Override
     public List<ItemCat> querByParentId(ItemCat record) {
-        return itemCatMapper.select(record);
+
+        List<ItemCat> select = itemCatMapper.select(record);
+
+        return select;
+
     }
+
 }

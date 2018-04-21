@@ -1,6 +1,5 @@
 package com.taotao.manage.controller;
 
-import com.taotao.manage.pojo.Item;
 import com.taotao.manage.pojo.ItemCat;
 import com.taotao.manage.service.ItemCatService;
 import org.springframework.beans.BeanUtils;
@@ -13,7 +12,7 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import com.taotao.manage.pojo.ItemCatVO;
+import com.taotao.manage.controller.vo.ItemCatVO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +28,7 @@ public class ItemCatController {
         try {
             ItemCat record = new ItemCat();
             record.setParentId(parentId);
+            record.setStatus(1);
             List<ItemCat> itemCats = itemCatService.querByParentId(record);
             if (CollectionUtils.isEmpty(itemCats)) {
                 return ResponseEntity.notFound().build();
@@ -36,8 +36,9 @@ public class ItemCatController {
             List<ItemCatVO> itemCatVOList = new ArrayList<>();
             for (ItemCat itemCat : itemCats) {
                 ItemCatVO itemCatVO = new ItemCatVO();
-                BeanUtils.copyProperties(itemCatVO,itemCat);
+                BeanUtils.copyProperties(itemCat,itemCatVO);
                 itemCatVOList.add(itemCatVO);
+                System.out.println(itemCat+":"+itemCatVO);
             }
             return ResponseEntity.ok(itemCatVOList);
         } catch (BeansException e) {

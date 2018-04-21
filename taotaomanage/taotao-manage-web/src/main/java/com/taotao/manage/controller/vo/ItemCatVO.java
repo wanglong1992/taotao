@@ -1,4 +1,6 @@
-package com.taotao.manage.pojo;
+package com.taotao.manage.controller.vo;
+
+import com.taotao.manage.pojo.ItemCat;
 
 public class ItemCatVO extends ItemCat {
     public String getText() {
