@@ -69,6 +69,25 @@ public class ItemCat extends BasePojo {
     public void setIsParent(Boolean isParent) {
         this.isParent = isParent;
     }
+    
+/*    public String getText(){
+    	return this.name;
+    }
+    
+    public String getState(){
+    	return this.isParent ? "closed" : "open";
+    }
+*/
 
-
+    @Override
+    public String toString() {
+        return "ItemCat{" +
+                "id=" + id +
+                ", parentId=" + parentId +
+                ", name='" + name + '\'' +
+                ", status=" + status +
+                ", sortOrder=" + sortOrder +
+                ", isParent=" + isParent +
+                '}';
+    }
 }
