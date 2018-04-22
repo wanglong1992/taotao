@@ -14,12 +14,12 @@ import java.util.Date;
 import java.util.List;
 
 @SuppressWarnings("all")
-public class BaseService<T extends BasePojo> {
+public  abstract class BaseService<T extends BasePojo> {
 
     protected Class<T> clazz;
     @Autowired
     //泛型注入
-    private Mapper<T> mapper;
+    protected Mapper<T> mapper;
 
     {
         ParameterizedType parameterizedType = (ParameterizedType) this.getClass().getGenericSuperclass();
