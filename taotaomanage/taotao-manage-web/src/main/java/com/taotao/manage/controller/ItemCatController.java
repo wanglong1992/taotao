@@ -1,5 +1,6 @@
 package com.taotao.manage.controller;
 
+import com.taotao.manage.controller.vo.ItemCatVO;
 import com.taotao.manage.pojo.ItemCat;
 import com.taotao.manage.service.ItemCatService;
 import org.springframework.beans.BeanUtils;
@@ -12,18 +13,17 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import com.taotao.manage.controller.vo.ItemCatVO;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-@RequestMapping("item")
+@RequestMapping("item/cat")
 public class ItemCatController {
     @Autowired
     private ItemCatService itemCatService;
 
-    @GetMapping("cat")
+    @GetMapping
     public ResponseEntity<List<ItemCatVO>> getItemCatList(@RequestParam(name = "id", defaultValue = "0") Long parentId) {
         try {
             ItemCat record = new ItemCat();
