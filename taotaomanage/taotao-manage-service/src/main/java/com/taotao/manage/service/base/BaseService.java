@@ -7,6 +7,7 @@ import com.github.pagehelper.PageInfo;
 import com.taotao.manage.pojo.BasePojo;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.persistence.Id;
 import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -121,20 +122,31 @@ public  abstract class BaseService<T extends BasePojo> {
     public Integer update(T record) {
         record.setUpdated(new Date());
         T old = null;
+
+           // old = mapper.selectByPrimaryKey();
         try {
-            old = mapper.selectOne(record);
-            Field[] declaredFields = old.getClass().getDeclaredFields();
+            Field[] declaredFields = record.getClass().getDeclaredFields();
+            for (Field field : declaredFields) {
+                field.setAccessible(true);
+                if(field.isAnnotationPresent(Id.class)&&field.get(record)!=null){
+                    old = mapper.selectByPrimaryKey(field.get(record));
+                    break;
+                }
+            }
             for (Field field : declaredFields) {
                 field.setAccessible(true);
                 Object value = field.get(record);
                 if (value != null) {
                     field.set(old, value);
                 }
+
             }
+            return mapper.updateByPrimaryKey(old);
         } catch (IllegalAccessException e) {
             e.printStackTrace();
+            return  null;
         }
-        return mapper.updateByPrimaryKey(old);
+
     }
 
     /**

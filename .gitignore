@@ -1,2 +1,4 @@
 .idea
 *.iml
+/taotaomanage/taotao-manage-web/src/main/resources/jdbc.properties
+test
