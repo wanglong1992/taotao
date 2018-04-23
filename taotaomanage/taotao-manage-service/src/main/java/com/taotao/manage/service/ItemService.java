@@ -17,11 +17,9 @@ public class ItemService extends BaseService<Item> {
         //初始化item
         item.setId(null);
         item.setStatus(1);
-        Integer count1 = this.save(item);
-        ItemDesc itemDesc = new ItemDesc();
-        itemDesc.setItemDesc(desc);
-        itemDesc.setItemId(item.getId());
-        Integer count2 = itemDescService.save(itemDesc);
-        return count1 == 1 && count2 == 1;
-    }
+        
+        } 
+            //return Boolean.FALSE
+         
+ }
 }
