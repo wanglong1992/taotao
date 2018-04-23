@@ -76,6 +76,8 @@ var TT = TAOTAO = {
         		}
         	}
         	$(e).unbind('click').click(function(){
+        		// $(this).parentsUntil("form") 找form和this之间的元素,
+				//$(this).parentsUntil("form").parent("form"); 找到form
         		var form = $(this).parentsUntil("form").parent("form");
         		KindEditor.editor(TT.kingEditorParams).loadPlugin('multiimage',function(){
         			var editor = this;

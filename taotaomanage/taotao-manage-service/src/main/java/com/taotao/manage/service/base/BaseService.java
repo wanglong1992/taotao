@@ -122,6 +122,7 @@ public  abstract class BaseService<T extends BasePojo> {
     public Integer update(T record) {
         record.setUpdated(new Date());
         T old = null;
+        Object id=null;
 
            // old = mapper.selectByPrimaryKey();
         try {
@@ -130,8 +131,12 @@ public  abstract class BaseService<T extends BasePojo> {
                 field.setAccessible(true);
                 if(field.isAnnotationPresent(Id.class)&&field.get(record)!=null){
                     old = mapper.selectByPrimaryKey(field.get(record));
+                    id=field.get(record);
                     break;
                 }
+            }
+            if(id==null){
+                throw  new NullPointerException("修改时主键不能为null");
             }
             for (Field field : declaredFields) {
                 field.setAccessible(true);
