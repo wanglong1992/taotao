@@ -15,7 +15,7 @@ import java.util.Date;
 import java.util.List;
 
 @SuppressWarnings("all")
-public  abstract class BaseService<T extends BasePojo> {
+public abstract class BaseService<T extends BasePojo> {
 
     protected Class<T> clazz;
     @Autowired
@@ -122,21 +122,21 @@ public  abstract class BaseService<T extends BasePojo> {
     public Integer update(T record) {
         record.setUpdated(new Date());
         T old = null;
-        Object id=null;
+        Object id = null;
 
-           // old = mapper.selectByPrimaryKey();
+        // old = mapper.selectByPrimaryKey();
         try {
             Field[] declaredFields = record.getClass().getDeclaredFields();
             for (Field field : declaredFields) {
                 field.setAccessible(true);
-                if(field.isAnnotationPresent(Id.class)&&field.get(record)!=null){
+                if (field.isAnnotationPresent(Id.class) && field.get(record) != null) {
                     old = mapper.selectByPrimaryKey(field.get(record));
-                    id=field.get(record);
+                    id = field.get(record);
                     break;
                 }
             }
-            if(id==null){
-                throw  new NullPointerException("修改时主键不能为null");
+            if (id == null) {
+                throw new NullPointerException("修改时主键不能为null");
             }
             for (Field field : declaredFields) {
                 field.setAccessible(true);
@@ -149,7 +149,7 @@ public  abstract class BaseService<T extends BasePojo> {
             return mapper.updateByPrimaryKey(old);
         } catch (IllegalAccessException e) {
             e.printStackTrace();
-            return  null;
+            return null;
         }
 
     }
@@ -187,5 +187,13 @@ public  abstract class BaseService<T extends BasePojo> {
 
     public int deleteByWhere(T record) {
         return mapper.delete(record);
+    }
+
+    public PageInfo<T> queryPageListOrderBy(String orderBy, Integer pageNum, Integer pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        Example example = new Example(this.clazz);
+        example.setOrderByClause(orderBy);
+        List<T> list = mapper.selectByExample(example);
+        return new PageInfo<>(list);
     }
 }
