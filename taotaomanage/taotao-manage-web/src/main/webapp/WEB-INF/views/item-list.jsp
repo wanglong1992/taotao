@@ -70,7 +70,7 @@
                 onLoad: function () {
                     //回显数据
                     var data = $("#itemList").datagrid("getSelections")[0];
-                    console.log(data)
+                    // console.log(data)
                     data.priceView = TAOTAO.formatPrice(data.price);
                     $("#itemeEditForm").form("load", data);
 

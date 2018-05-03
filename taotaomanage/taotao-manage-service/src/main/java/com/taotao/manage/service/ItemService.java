@@ -25,4 +25,14 @@ public class ItemService extends BaseService<Item> {
         return count1 == 1 && count2 == 1;
 
     }
+
+    public boolean updateItemAndDesc(Item item, String desc) {
+        item.setStatus(null);
+        Integer update1 = this.updateSelective(item);
+        ItemDesc itemDesc = new ItemDesc();
+        itemDesc.setItemDesc(desc);
+        itemDesc.setItemId(item.getId());
+        Integer update2 = itemDescService.updateSelective(itemDesc);
+        return update1 == 1 && update2 == 1;
+    }
 }

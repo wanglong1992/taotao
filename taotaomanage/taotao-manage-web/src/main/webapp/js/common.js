@@ -71,9 +71,30 @@ var TT = TAOTAO = {
         		var imgs = data.pics.split(",");
         		for(var i in imgs){
         			if($.trim(imgs[i]).length > 0){
-        				_ele.siblings(".pics").find("ul").append("<li><a href='"+imgs[i]+"' target='_blank'><img src='"+imgs[i]+"' width='80' height='50' /></a></li>");
-        			}
-        		}
+                        _ele.siblings(".pics").find("ul").append("<li><div><a class='delete'>x</a></div><a href='" + imgs[i] + "' target='_blank'><img src='" + imgs[i] + "' width='80' height='50' /></a></li>");
+                    }
+                }
+                $(".delete").click(function () {
+                    var imageSrc = $(this).parent().next().children().attr("src");
+                    $.ajax({
+                        url: "/rest/pic/upload/delete?path=" + imageSrc,
+                        type: "POST",
+                        dataType: "json",
+                        statusCode: {
+                            "204": function () {
+
+                            },
+                            "500": function () {
+
+                            }
+                        }
+
+
+                    });
+                    $(this).parent().parent().remove();
+
+
+                })
         	}
         	$(e).unbind('click').click(function(){
         		// $(this).parentsUntil("form") 找form和this之间的元素,
@@ -88,7 +109,7 @@ var TT = TAOTAO = {
 								imgArray.push(data.url);
 								form.find(".pics ul").append("<li><a href='"+data.url+"' target='_blank'><img src='"+data.url+"' width='80' height='50' /></a></li>");
 							});
-							form.find("[name=image]").val(imgArray.join(","));
+                            form.find("[name=image]").val(form.find("[name=image]").val() + "," + imgArray.join(","));
 							editor.hideDialog();
 						}
 					});

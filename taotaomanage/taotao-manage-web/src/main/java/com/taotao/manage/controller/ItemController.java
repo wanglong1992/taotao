@@ -10,10 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.CollectionUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("item")
@@ -45,6 +42,20 @@ public class ItemController {
                 return ResponseEntity.ok(null);
             }
             return ResponseEntity.ok(new EasyUIPageResult<Item>(new Long(pageInfo.getTotal()).intValue(), pageInfo.getList()));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+    }
+
+    @PutMapping
+    public ResponseEntity<Void> update(Item item, @RequestParam("desc") String desc) {
+
+        try {
+            boolean result = itemService.updateItemAndDesc(item, desc);
+            if (result) {
+                return ResponseEntity.noContent().build();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -196,4 +196,6 @@ public abstract class BaseService<T extends BasePojo> {
         List<T> list = mapper.selectByExample(example);
         return new PageInfo<>(list);
     }
+
+
 }

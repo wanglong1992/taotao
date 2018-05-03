@@ -8,6 +8,8 @@ import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -99,6 +101,21 @@ public class PicUploadController {
         String fileName = new DateTime(nowDate).toString("yyyyMMddhhmmssSSSS") + RandomUtils.nextInt(100, 9999) + "."
                 + StringUtils.substringAfterLast(sourceFileName, ".");
         return fileFolder + File.separator + fileName;
+    }
+
+    @PostMapping("delete")
+    public ResponseEntity<Void> delete(@RequestParam("path") String path) {
+        try {
+            String realPath = StringUtils.replace(path, propretiesService.IMAGE_URL, propretiesService.REPOSITORY_PATH);
+            File file = new File(realPath);
+            if (file.exists()) {
+                file.delete();
+            }
+            return ResponseEntity.noContent().build();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
     }
 
 }

@@ -12,11 +12,6 @@
     <artifactId>taotao-manage-pojo</artifactId>
 
     <dependencies>
-        <!-- Jackson Json处理工具包，pojo中可能会使用到@JsonIgnore注解 -->
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-        </dependency>
         <dependency>
             <groupId>javax.persistence</groupId>
             <artifactId>persistence-api</artifactId>
