@@ -8,6 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+//@Controller
+//@RequestMapping("api/item/cat")
 @RestController("api/item/cat")
 public class ApiItemCatController {
     @Autowired
