@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/jquery-easyui-1.5.1/jquery.min.js"></script>
+    <script>
+        $(function () {
+            //   alert()
+            $.ajax({
+                url: "./json.jsp",
+                type: "GET",
+                dataType: "json",
+                success: function (data) {
+                    //  var re= data;
+                    console.log(data.abc)
+                }
+            })
+        })
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>
