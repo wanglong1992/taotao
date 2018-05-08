@@ -1,6 +1,7 @@
 package com.taotao.manage.controller.api;
 
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.taotao.common.pojo.ItemCatResult;
 import com.taotao.manage.service.ItemCatService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,12 +14,14 @@ import org.springframework.web.bind.annotation.RestController;
 //@RequestMapping("api/item/cat")
 @RestController("api/item/cat")
 public class ApiItemCatController {
+    private static final ObjectMapper MAPPER = new ObjectMapper();
     @Autowired
     private ItemCatService itemCatService;
 
     @GetMapping
     public ResponseEntity<ItemCatResult> queryItemCatAll() {
         try {
+
             ItemCatResult itemCatResult = itemCatService.queryItemCatResult();
             if (itemCatResult == null) {
                 return ResponseEntity.notFound().build();
@@ -29,4 +32,6 @@ public class ApiItemCatController {
         }
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
     }
+
+
 }
